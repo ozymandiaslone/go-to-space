@@ -13,9 +13,10 @@ import (
 	"github.com/gocolly/colly"
 )
 
-func main() {
+func scrape() string {
 	//default connector
 	c := colly.NewCollector()
+	var filetype string
 	var pagelinks [100]string
 	var imagelinks [80]string
 	count := 0
@@ -49,7 +50,7 @@ func main() {
 		link := b.Request.AbsoluteURL(b.Attr("href"))
 		fmt.Printf("Detected Image source: %v\n", link)
 		fmt.Println("Attemtping Download...")
-		filetype := string(link[len(link)-4:])
+		filetype = string(link[len(link)-4:])
 		fmt.Printf("Detected Filetype:%v\n", filetype)
 		downloadFile(link, "upload"+filetype)
 		fmt.Println("Success! Download Complete!")
@@ -59,6 +60,8 @@ func main() {
 		writeToFile("title.txt", c.Text)
 	})
 	c.Visit(selectRandom(imagelinks))
+
+	return filetype
 
 }
 
@@ -73,6 +76,8 @@ func selectRandom(a [80]string) string {
 		return selectRandom(a)
 	}
 }
+
+// generate a random url to visit
 func randomUrl() string {
 	randint := rand.Intn(580)
 	randint = randint * 50
@@ -90,7 +95,7 @@ func downloadFile(URL, fileName string) error {
 	defer response.Body.Close()
 
 	if response.StatusCode != 200 {
-		return errors.New("Received non 200 response code")
+		return errors.New("received non 200 response code")
 	}
 	//Create a empty file
 	file, err := os.Create(fileName)
