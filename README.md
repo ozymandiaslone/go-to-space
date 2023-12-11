@@ -3,7 +3,9 @@ This project has been unfortunately deprecated due to the prohibitive new API pr
 
 ## Function
 This was a twitter bot - https://twitter.com/Space_Pics_Bot - 
-The bot performed exactly as I intended.
+The bot performed exactly as I intended, posting space-related pictures from ESA. It was a very simple implementation I made for fun, as an excuse to use Go. (Go is so simple I can't decide if I love it, or think its mid).
+
+The bot (as of the time of writing) has ~2200 followers - though read the below passages for an interesting aside regarding that.
 
 ## Surprising occurence
 This bot used to tweet once an hour, every hour of the day, for a very long time. Months and months. A while into this process, I noticed that I was gaining followers. The catch is, I'm nearly 100% certain these followers are mostly bots.
